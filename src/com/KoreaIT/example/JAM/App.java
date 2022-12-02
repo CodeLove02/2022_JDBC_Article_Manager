@@ -55,9 +55,11 @@ public class App {
 
 		MemberController memberController = new MemberController(conn, sc);
 		ArticleController articleController = new ArticleController(conn, sc);
-		
+
 		if (cmd.equals("member join")) {
 			memberController.doJoin(cmd);
+		} else if (cmd.equals("member login")) {
+			memberController.doLogin(cmd);
 		} else if (cmd.equals("article write")) {
 			articleController.doWrite(cmd);
 		} else if (cmd.equals("article list")) {
