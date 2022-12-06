@@ -27,7 +27,7 @@ public class ArticleController extends Controller {
 		String title = sc.nextLine();
 		System.out.printf("내용 : ");
 		String body = sc.nextLine();
-		
+
 		int memberId = Container.session.loginedMemberId;
 
 		int id = articleService.doWrite(memberId, title, body);
@@ -49,7 +49,8 @@ public class ArticleController extends Controller {
 		System.out.println("번호	|	제목	|	작성자	|	조회	|	작성일");
 
 		for (Article article : articles) {
-			System.out.printf("%d	|	%s	|	%s	|	%d	|	%s\n", article.id, article.title, article.writerName, article.hit, article.updateDate);
+			System.out.printf("%d	|	%s	|	%s	|	%d	|	%s\n", article.id, article.title, article.writerName,
+					article.hit, article.updateDate);
 		}
 	}
 
@@ -57,7 +58,7 @@ public class ArticleController extends Controller {
 		int id = Integer.parseInt(cmd.split(" ")[2]);
 
 		articleService.increaseHit(id);
-		
+
 		Article article = articleService.getArticle(id);
 
 		if (article == null) {
@@ -84,10 +85,15 @@ public class ArticleController extends Controller {
 
 		int id = Integer.parseInt(cmd.split(" ")[2]);
 
-		boolean isArticleExists = articleService.isArticleExists(id);
+		Article article = articleService.getArticle(id);
 
-		if (isArticleExists == false) {
+		if (article == null) {
 			System.out.printf("%d번 게시글은 존재하지 않습니다\n", id);
+			return;
+		}
+
+		if (article.memberId != Container.session.loginedMemberId) {
+			System.out.println("해당 게시글에 대한 권한이 없습니다");
 			return;
 		}
 
@@ -112,10 +118,15 @@ public class ArticleController extends Controller {
 
 		int id = Integer.parseInt(cmd.split(" ")[2]);
 
-		boolean isArticleExists = articleService.isArticleExists(id);
+		Article article = articleService.getArticle(id);
 
-		if (isArticleExists == false) {
+		if (article == null) {
 			System.out.printf("%d번 게시글은 존재하지 않습니다\n", id);
+			return;
+		}
+
+		if (article.memberId != Container.session.loginedMemberId) {
+			System.out.println("해당 게시글에 대한 권한이 없습니다");
 			return;
 		}
 

@@ -102,7 +102,7 @@ public class ArticleDao {
 		sql.append("UPDATE article");
 		sql.append("SET hit = hit + 1");
 		sql.append("WHERE id = ?", id);
-		
+
 		DBUtil.update(Container.conn, sql);
 	}
 }
