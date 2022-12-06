@@ -12,8 +12,7 @@ import com.KoreaIT.example.JAM.util.SecSql;
 public class ArticleDao {
 	private Connection conn;
 
-	public ArticleDao(Connection conn) {
-		this.conn = conn;
+	public ArticleDao() {
 	}
 
 	public int doWrite(String title, String body) {
