@@ -11,6 +11,7 @@ public class Article extends Object {
 	public String title;
 	public String body;
 	public String writerName;
+	public int hit;
 
 	public Article(Map<String, Object> articleMap) {
 		this.id = (int) articleMap.get("id");
@@ -20,11 +21,12 @@ public class Article extends Object {
 		this.title = (String) articleMap.get("title");
 		this.body = (String) articleMap.get("body");
 		this.writerName = (String) articleMap.get("writerName");
+		this.hit = (int) articleMap.get("hit");
 	}
 
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", regDate=" + regDate + ", updateDate=" + updateDate + ", memberId=" + memberId
-				+ ", title=" + title + ", body=" + body + ", writerName=" + writerName + "]";
+				+ ", title=" + title + ", body=" + body + ", writerName=" + writerName + ", hit=" + hit + "]";
 	}
 }

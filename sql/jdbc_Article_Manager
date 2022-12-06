@@ -22,8 +22,18 @@ CREATE TABLE `member` (
 	`name` VARCHAR(50) NOT NULL
 );
 
+# article 테이블에 회원번호 컬럼 추가
 ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 DESC article;
+
+# article 테이블에 조회수 컬럼 추가
+ALTER TABLE article ADD COLUMN hit INT UNSIGNED NOT NULL;
+
+# article 테이블 조회
+SELECT * FROM article;
+
+# member 테이블 조회
+SELECT * FROM `member`;
 
 # article 데이터 추가
 INSERT INTO article
@@ -31,29 +41,32 @@ SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 title = 'test1',
-`body` = 'test1';
+`body` = 'test1',
+hit = 5;
 
-# article 데이터 추가
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
 title = 'test2',
-`body` = 'test2';
+`body` = 'test2',
+hit = 15;
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 2,
 title = 'test3',
-`body` = 'test3';
+`body` = 'test3',
+hit = 17;
 
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 memberId = 1,
 title = 'test4',
-`body` = 'test4';
+`body` = 'test4',
+hit = 20;
 
 # member 데이터 추가
 INSERT INTO `member`
@@ -69,9 +82,3 @@ updateDate = NOW(),
 loginId = 'test2',
 loginPw = 'test2',
 `name` = '김영희';
-
-# article 테이블 조회
-SELECT * FROM article;
-
-# member 테이블 조회
-SELECT * FROM `member`;
