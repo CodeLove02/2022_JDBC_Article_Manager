@@ -11,7 +11,6 @@ public class ArticleController extends Controller {
 	private ArticleService articleService;
 
 	public ArticleController() {
-
 		articleService = Container.articleService;
 	}
 

@@ -11,7 +11,7 @@ import com.KoreaIT.example.JAM.controller.MemberController;
 
 public class App {
 	public void run() {
-		Scanner sc = new Scanner(System.in);
+		Container.sc = new Scanner(System.in);
 
 		Container.init();
 
@@ -32,6 +32,9 @@ public class App {
 
 			try {
 				conn = DriverManager.getConnection(url, "root", "");
+
+				Container.conn = conn;
+
 				doAction(cmd);
 
 				if (cmd.equals("exit")) {
@@ -51,7 +54,7 @@ public class App {
 				}
 			}
 		}
-		sc.close();
+		Container.sc.close();
 	}
 
 	private void doAction(String cmd) {
