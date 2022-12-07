@@ -111,7 +111,7 @@ public class ArticleDao {
 
 		String searchKeyword = "";
 		int limitFrom = -1;
-		int limitTake = -1;		
+		int limitTake = -1;	
 		
 		if(args.containsKey("searchKeyword")) {
 			searchKeyword = (String) args.get("searchKeyword");
@@ -125,16 +125,19 @@ public class ArticleDao {
 			limitTake = (int) args.get("limitTake");
 		}
 		
-		sql.append("SELECT A.*, M.name AS writerName");
-		sql.append("FROM article AS A");
-		sql.append("INNER JOIN `member` AS M");
-		sql.append("ON A.memberId = M.id");
-		if(searchKeyword.length() > 0) {
-			sql.append("WHERE A.title LIKE CONCAT('%', ?, '%')", searchKeyword);
-		}
-		sql.append("ORDER BY id DESC");
+		sql.append("SELECT *");
+		sql.append("FROM (");
+		sql.append("SELECT a.*, m.name AS writerName");
+		sql.append("FROM article AS a");
+		sql.append("INNER JOIN `member` AS m");
+		sql.append("ON a.memberId = m.id");
+		sql.append("ORDER BY a.id DESC");
 		if(limitFrom != -1) {
 			sql.append("LIMIT ?, ?", limitFrom, limitTake);
+		}
+		sql.append(") A");
+		if(searchKeyword.length() > 0) {
+			sql.append("WHERE title LIKE CONCAT('%', ?, '%')", searchKeyword);
 		}
 
 		List<Map<String, Object>> articleListMap = DBUtil.selectRows(Container.conn, sql);
